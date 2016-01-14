@@ -1,8 +1,8 @@
-describe('linkedList', function() {
+describe('doublyLinkedList', function() {
   var linkedList;
 
   beforeEach(function() {
-    linkedList = LinkedList();
+    linkedList = DoublyLinkedList();
   });
 
   it('should have a head and tail', function() {
@@ -51,5 +51,25 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
-  // add more tests here to test the functionality of linkedList
+  it('should set a new head when addToHead is called', function(){
+    linkedList.addToHead(10);
+    expect(linkedList.head.value).to.equal(10);
+    linkedList.addToHead(11);
+    expect(linkedList.head.value).to.equal(11);
+  });
+
+  it('should return the former tail when removeTail is called', function(){
+    linkedList.addToTail(4);
+    linkedList.addToTail(5);
+    var currentTail = linkedList.tail;
+    var expectedNextTail = currentTail.previous;
+    expect(currentTail.value).to.equal(linkedList.removeTail());
+    //Check to make sure we transfered the tail to the expected node
+    expect(expectedNextTail).to.equal(linkedList.tail);
+  });
+
+  xit('should have a number of connected nodes equal to the list length', function(){
+  
+  });
+  //add more tests here to test the functionality of linkedList
 });

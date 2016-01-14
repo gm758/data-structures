@@ -1,4 +1,4 @@
-var LinkedList = function() {
+var DoublyLinkedList = function() {
   var sizeList = 0;
   var list = {};
   list.head = null;
@@ -24,8 +24,34 @@ var LinkedList = function() {
 
   };
 
+  list.addToHead = function(value) {
+    var node = new Node(value);
+    list.tail = list.tail || node;
+
+    if (list.head!==null){
+      list.head.previous = node;
+      node.next = list.head;
+    }
+    list.head = node;
+    sizeList++;
+  };
+
+  list.removeTail = function(){
+    var initialTail = list.tail;
+
+    list.tail = list.tail.previous;
+    list.tail.next = null;
+
+    initialTail.previous = null;
+    sizeList--;
+    return initialTail.value;
+  };
+
   list.removeHead = function() {
     var nextHead = list.head.next;
+    if(nextHead!==null){
+      nextHead.previous = null;
+    }
     var initialHead = list.head;
     list.head.next = null;
     list.head = nextHead;
