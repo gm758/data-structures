@@ -64,9 +64,6 @@ Bucket.prototype.find = function(key){
 
 Bucket.prototype.getTuple = function(key){
   var foundIndex = this.find(key);
-  console.log(this.tuples);
-  console.log(key);
-  console.log(foundIndex);
   return foundIndex===-1 ? undefined : this.tuples[foundIndex];
 };
 
