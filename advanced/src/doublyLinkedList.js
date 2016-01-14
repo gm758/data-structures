@@ -14,7 +14,7 @@ var LinkedList = function() {
 
     if(list.tail!==null){
       list.tail.next = node;
-      node.previous = list.tail; a
+      node.previous = list.tail;
     }
     
     //set tail to new to new node
