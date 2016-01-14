@@ -3,11 +3,19 @@
 // ------------------------
 // Instantiate a new graph
 var Graph = function() {
+  this.nodes = {};
+  this.numberOfNodes = 0;
 };
 
 // ------------------------
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
+  var Node = function(value){
+    this.connectedNodes = [];
+    this.value = value;
+  };
+
+  this.nodes[node] = new Node(node);  
 };
 
 // ------------------------
@@ -43,5 +51,6 @@ Graph.prototype.forEachNode = function(cb) {
 /*
  * Complexity: What is the time complexity of the above functions?
  */
+
 
 
