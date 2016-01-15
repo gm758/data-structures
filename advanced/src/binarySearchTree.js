@@ -6,6 +6,10 @@ var BinarySearchTree = function(value) {
 
 BinarySearchTree.prototype.insert = function(value){
   //dry this code
+  if (this.getMaxDepth() > this.getMinDepth() * 2) {
+    this.rebalance();
+  }
+  
   if(value < this.value){
     if(this.left===undefined){
       this.left = new BinarySearchTree(value);
