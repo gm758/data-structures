@@ -46,14 +46,9 @@ BinarySearchTree.prototype.contains = function(value){
 BinarySearchTree.prototype.rebalance = function(){
   var treeNodes = [];
 
-  this.depthFirstLog(function(tree){
+  this.inOrderLog(function(tree){
     treeNodes.push(tree);
   });
-
-  treeNodes.sort(function(a,b){
-    return a.value > b.value;
-  });
-
 
   var build = function(arr, start, end){
     if (start > end) {
@@ -66,13 +61,6 @@ BinarySearchTree.prototype.rebalance = function(){
     node.left = build(arr, start, medianIndex-1);
     node.right = build(arr, medianIndex+1, end);
     return node;
-    // if (newTree === undefined){
-    //   newTree = new Tree(median);
-    // } else {
-    //   newTree.insert(median);
-    // }
-    // build(array, start, medianIndex-1);
-    // build(array, medianIndex+1, end);
   };
 
   var newTree = build(treeNodes, 0, treeNodes.length-1);
@@ -87,6 +75,20 @@ BinarySearchTree.prototype.depthFirstLog = function(func){
   if(this.left!==undefined){
     this.left.depthFirstLog(func);
   }
+
+  if(this.right!==undefined){
+    this.right.depthFirstLog(func);
+  }
+
+};
+
+//Traverses tree in sorted order
+BinarySearchTree.prototype.inOrderLog = function(func){
+
+  if(this.left!==undefined){
+    this.left.depthFirstLog(func);
+  }
+  func(this.value);
 
   if(this.right!==undefined){
     this.right.depthFirstLog(func);
