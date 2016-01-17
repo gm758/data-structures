@@ -55,16 +55,14 @@ Phone.prototype.press = function(entry){
     this.backspace();
   } else if (entry === '_') {
     this.sentence += ' ';
-  } else if (entry === '1' || entry === '#'){
-    this._keys.push(entry);
   } else {
-    this._keys.push(this._t9[entry]);
+    this._keys.push(entry);
   }
 };
 
 //Removes most recent keypress
 Phone.prototype.backspace = function(){
-  this._keys.pop();
+  var removedChar = this._keys.pop();
 };
 
 Phone.prototype.clearWord = function(){
@@ -73,21 +71,22 @@ Phone.prototype.clearWord = function(){
 
 Phone.prototype.addWordToSentence = function(word){
   this.sentence += word;
+  this.clearWord();
 };
 
 Phone.prototype.getPotentialWords = function() {
 
   var wordList = [];
+  var self = this;
 
-  var recursive = function (keyPresses, currentKeyPress,currentWord, node) {
-
+  var recursive = function (keyPresses, currentKeyPress, currentWord, node) {
     if (currentKeyPress === keyPresses.length) { 
         if ('"' in node.children) {
           wordList.push(currentWord);
         }
     } else {
-      for (var i=0; i<keyPresses[currentKeyPress].length; i++) {
-        var potentialLetter = keyPresses[currentKeyPress][i];
+      for (var i=0; i<self._t9[keyPresses[currentKeyPress]].length; i++) {
+        var potentialLetter = self._t9[keyPresses[currentKeyPress]][i];
 
         if (potentialLetter in node.children) {
           recursive(keyPresses, currentKeyPress + 1, currentWord + potentialLetter, node.children[potentialLetter]);

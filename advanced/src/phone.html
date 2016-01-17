@@ -13,12 +13,12 @@
 			
 			//Get keypress
 			var entry = $(this).val();
-
-			$('input.phone-screen').val(currentVal + entry);
 			phone.press(entry);
+      
+      $('input.phone-screen').val(phone._keys.join(''));
 
 			var words = phone.getPotentialWords();
-      
+
 			$('.word-options').html(words.join(' '));
 		});
 
