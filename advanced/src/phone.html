@@ -2,25 +2,36 @@
 
 <html>
 <head>
+  <link rel="stylesheet" href="phone.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="englishWords.js"></script>
 	<script src="trie.js"></script>
 	<script>
-	$(document).ready(function(){
-		var phone = new Phone();
-		$('.btn').on('click', function(event) {
-			var currentVal = $('input.phone-screen').val();
-			
-			//Get keypress
-			var entry = $(this).val();
-			phone.press(entry);
+  $(document).ready(function(){
+    var refreshPhoneScreen = function(){
+      $('input.phone-screen').val(phone.getScreen());
+    };
+
+    var phone = new Phone();
+    $('.btn').on('click', function(event) {
+      var currentVal = $('input.phone-screen').val();
       
-      $('input.phone-screen').val(phone._keys.join(''));
+      //Get keypress
+      var entry = $(this).val();
+      phone.press(entry);
+      
+      refreshPhoneScreen();
+      var words = phone.getPotentialWords();
 
-			var words = phone.getPotentialWords();
+      $('.word-options').html('<span class="word">' + words.join('</span> <span class="word">') + '</span>');
+      
+      $('.word').on('click', function(event){
+        phone.addWordToSentence($(this).html());
+        refreshPhoneScreen();
+        $('.word-options').html('');
+      });
 
-			$('.word-options').html(words.join(' '));
-		});
+    });
 
 	});
 	</script>
@@ -31,19 +42,19 @@
 	<span class="word-options"></span>
 	<div>
 		<div class='row'>
-			<button class='btn' value='1'>1</button>
-			<button class='btn' value='2'>2</button>
-			<button class='btn' value='2'>3</button>
+      <button class='btn' value='1'>1<br>\t</button>
+			<button class='btn' value='2'>2<br>abc</button>
+			<button class='btn' value='3'>3<br>def</button>
 		</div>
 		<div class='row'>
-			<button class='btn' value='4'>4</button>
-			<button class='btn' value='5'>5</button>
-			<button class='btn' value='6'>6</button>
+			<button class='btn' value='4'>4<br>ghi</button>
+			<button class='btn' value='5'>5<br>jkl</button>
+			<button class='btn' value='6'>6<br>mno</button>
 		</div>
 		<div class='row'>
-			<button class='btn' value='7'>7</button>
-			<button class='btn' value='8'>8</button>
-			<button class='btn' value='9'>9</button>
+			<button class='btn' value='7'>7<br>pqrs</button>
+			<button class='btn' value='8'>8<br>tuv</button>
+			<button class='btn' value='9'>9<br>wxyz</button>
 		</div>
 		<div class='row'>
 			<button class='btn' value='<'><</button>

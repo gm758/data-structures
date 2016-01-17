@@ -65,13 +65,13 @@ Phone.prototype.backspace = function(){
   var removedChar = this._keys.pop();
 };
 
-Phone.prototype.clearWord = function(){
+Phone.prototype.clearKeys = function(){
   this._keys = [];
 };
 
 Phone.prototype.addWordToSentence = function(word){
-  this.sentence += word;
-  this.clearWord();
+  this.sentence += word + ' ';
+  this.clearKeys();
 };
 
 Phone.prototype.getPotentialWords = function() {
@@ -99,3 +99,6 @@ Phone.prototype.getPotentialWords = function() {
   return wordList;
 };
 
+Phone.prototype.getScreen = function(){
+  return this.sentence + ' ' + this._keys.join('');
+};
