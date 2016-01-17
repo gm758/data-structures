@@ -24,7 +24,6 @@ Trie.prototype.getWord = function(){
 
 };
 
-
 var Phone = function(){
   this._t9 = {
     2: 'abc',
@@ -38,17 +37,34 @@ var Phone = function(){
   };
 
   this._lookupTree = new Trie();
+  
+  //Load the english dictionary
+  //NOTE: Phone requires englishWords.js to function
   for (var i = 0; i < words.length; i++){
     this._lookupTree.insertWord(words[i]);
   }
 
   this._keys = [];
+
+  this.sentence = "";
 };
 
 Phone.prototype.press = function(number){
   this._keys.push(this._t9[number]);
 };
 
+//Removes most recent keypress
+Phone.prototype.backspace = function(){
+  this._keys.pop();
+};
+
+Phone.prototype.clearWord = function(){
+  this._keys = [];
+};
+
+Phone.prototype.addWordToSentence = function(word){
+  this.sentence += word + ' ';
+};
 
 Phone.prototype.getPotentialWords = function() {
 
