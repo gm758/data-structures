@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="englishWords.js"></script>
+	<script src="trie.js"></script>
+	<script>
+	$(document).ready(function(){
+		var phone = new Phone();
+		$('.btn').on('click', function(event) {
+			var currentVal = $('input.phone-screen').val();
+			var entry = $(this).val();
+
+			$('input.phone-screen').val(currentVal + entry);
+			phone.press(entry);
+
+			var words = phone.getPotentialWords();
+			$('.word-options').html(words.join(' '));
+		});
+
+	});
+	</script>
+</head>
+<body>
+<div>
+	<input type="text" class="phone-screen">
+	<span class="word-options"></span>
+	<div>
+		<div class='row'>
+			<button class='btn' value='1'>1</button>
+			<button class='btn' value='2'>2</button>
+			<button class='btn' value='2'>3</button>
+		</div>
+		<div class='row'>
+			<button class='btn' value='4'>4</button>
+			<button class='btn' value='5'>5</button>
+			<button class='btn' value='6'>6</button>
+		</div>
+		<div class='row'>
+			<button class='btn' value='7'>7</button>
+			<button class='btn' value='8'>8</button>
+			<button class='btn' value='9'>9</button>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
