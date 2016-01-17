@@ -49,8 +49,17 @@ var Phone = function(){
   this.sentence = "";
 };
 
-Phone.prototype.press = function(number){
-  this._keys.push(this._t9[number]);
+Phone.prototype.press = function(entry){
+  
+  if (entry === '<' ){
+    this.backspace();
+  } else if (entry === '_') {
+    this.sentence += ' ';
+  } else if (entry === '1' || entry === '#'){
+    this._keys.push(entry);
+  } else {
+    this._keys.push(this._t9[entry]);
+  }
 };
 
 //Removes most recent keypress
@@ -63,7 +72,7 @@ Phone.prototype.clearWord = function(){
 };
 
 Phone.prototype.addWordToSentence = function(word){
-  this.sentence += word + ' ';
+  this.sentence += word;
 };
 
 Phone.prototype.getPotentialWords = function() {

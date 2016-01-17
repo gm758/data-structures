@@ -10,12 +10,15 @@
 		var phone = new Phone();
 		$('.btn').on('click', function(event) {
 			var currentVal = $('input.phone-screen').val();
+			
+			//Get keypress
 			var entry = $(this).val();
 
 			$('input.phone-screen').val(currentVal + entry);
 			phone.press(entry);
 
 			var words = phone.getPotentialWords();
+      
 			$('.word-options').html(words.join(' '));
 		});
 
@@ -41,6 +44,11 @@
 			<button class='btn' value='7'>7</button>
 			<button class='btn' value='8'>8</button>
 			<button class='btn' value='9'>9</button>
+		</div>
+		<div class='row'>
+			<button class='btn' value='<'><</button>
+			<button class='btn' value='_'>_</button>
+			<button class='btn' value='#'>#</button>
 		</div>
 	</div>
 </div>
